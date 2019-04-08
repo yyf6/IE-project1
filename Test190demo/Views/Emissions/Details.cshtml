@@ -1,0 +1,106 @@
+﻿@model Test190demo.Models.Emission
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Emission</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.jurisdiction_facility_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jurisdiction_facility_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.facility_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.facility_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.registered_business_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registered_business_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.primary_anzsic_class_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.primary_anzsic_class_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.primary_anzsic_class_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.primary_anzsic_class_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.substance_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.substance_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.air_total_emission_kg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.air_total_emission_kg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.suburb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.suburb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.longitude)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
