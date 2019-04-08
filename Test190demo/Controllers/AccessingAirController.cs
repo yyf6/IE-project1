@@ -45,6 +45,7 @@ namespace Test190demo.Controllers
             //                                   bedSA.Carpet.ToString());
             return RedirectToAction("BedRoomReport");
         }
+
         [HttpGet]
         public ActionResult BedRoomReport()
         {
