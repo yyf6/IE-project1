@@ -39,10 +39,10 @@ namespace Test190demo.Controllers
                                 bedSA.Smoke.ToString(),
                                 bedSA.Carpet.ToString());
 
-            BedRefResult = bedSAService.BedRef(bedSA.Mould.ToString(),
-                                               bedSA.Plants.ToString(),
-                                               bedSA.Smoke.ToString(),
-                                               bedSA.Carpet.ToString());
+            //BedRefResult = bedSAService.BedRef(bedSA.Mould.ToString(),
+            //                                   bedSA.Plants.ToString(),
+            //                                   bedSA.Smoke.ToString(),
+            //                                   bedSA.Carpet.ToString());
             return RedirectToAction("BedRoomReport");
         }
         [HttpGet]
@@ -54,10 +54,10 @@ namespace Test190demo.Controllers
             ViewBag.Smoke = BedReportResult[3];
             ViewBag.Carpet = BedReportResult[4];
 
-            ViewBag.RefMould = BedRefResult[0];
-            ViewBag.RefPlants = BedRefResult[1];
-            ViewBag.RefSmoke = BedRefResult[2];
-            ViewBag.RefCarpet = BedRefResult[3];
+            //ViewBag.RefMould = BedRefResult[0];
+            //ViewBag.RefPlants = BedRefResult[1];
+            //ViewBag.RefSmoke = BedRefResult[2];
+            //ViewBag.RefCarpet = BedRefResult[3];
             return View();
         }
 

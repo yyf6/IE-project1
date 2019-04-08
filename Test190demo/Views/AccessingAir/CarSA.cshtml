@@ -28,13 +28,13 @@
             </div>
         </div>
     </div>
-    <header id="head" data-ix="page-load-fade-in" class="header">       
-                <div class="slide-2 w-slide">
-                    <div class="slide-container">
-                        <h1 class="heading-7">We will help you to <br>improve the indoor <br>air quality</h1>
-                        <h4 class="heading-8">Let us help you realize your air condition</h4>
-                    </div>
-                </div>
+    <header id="head" data-ix="page-load-fade-in" class="header">
+        <div class="slide-2 w-slide">
+            <div class="slide-container">
+                <h1 class="heading-7">We will help you to <br>improve the indoor <br>air quality</h1>
+                <h4 class="heading-8">Let us help you realize your air condition</h4>
+            </div>
+        </div>
     </header>
     <h1 class="heading-5" style="color:#333">Assessing your car &#x27;s air</h1>
     <br />
@@ -47,29 +47,30 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <h3 style="color:#333">Q1) How old is your car?</h3>
+                <h3 style="color:#333">How old is your car?</h3>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div class="col-md-10">
                         <div class="checkbox">
-                            @Html.EnumDropDownListFor(model => model.CarStatus, null, htmlAttributes: new { @class = "form-control" })
+                            @Html.EnumDropDownListFor(model => model.CarStatus, null, htmlAttributes: new { @class = "form-control", @onchange = "changeStatus()" })
                             @Html.ValidationMessageFor(model => model.CarStatus, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-
-                <h3 style="color:#333">Q2) Have you changed your upholstery recently?</h3>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EnumDropDownListFor(model => model.UpholsteryChanging, null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.UpholsteryChanging, "", new { @class = "text-danger" })
+                <div name="Q2" style="display:none">
+                    <h3 style="color:#333">Have you changed your upholstery recently?</h3>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EnumDropDownListFor(model => model.UpholsteryChanging, null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UpholsteryChanging, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 style="color:#333">Q3) Do you open your AC vents when you turn on your AC?</h3>
+                <h3 style="color:#333">Do you open your AC vents when you turn on your AC?</h3>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div class="col-md-10">
@@ -80,7 +81,7 @@
                     </div>
                 </div>
 
-                <h3 style="color:#333">Q4) Do you get stuck in traffic often?</h3>
+                <h3 style="color:#333">Do you get stuck in traffic often?</h3>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div class="col-md-10">
@@ -91,7 +92,7 @@
                     </div>
                 </div>
 
-                <h3 style="color:#333">Q5) Where do you usually park your car?</h3>
+                <h3 style="color:#333">Where do you usually park your car?</h3>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div class="col-md-10">
@@ -108,8 +109,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-2" style="left:50px; top:5px">
-                        <a href="~/AccessingAir/Index" class="button-6 w-button" style="margin-right:20px">Return</a>
-                            </div>
+                            <a href="~/AccessingAir/Index" class="button-6 w-button" style="margin-right:20px">Return</a>
+                        </div>
                     </div>
                 </div>
             </div>

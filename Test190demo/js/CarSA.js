@@ -8,10 +8,29 @@
     }
 }
 
+
+function changeStatus(){
+    var carCondition = document.getElementsByName("CarStatus");
+    var Uphol = document.getElementsByName("Q2");
+    var car;
+    for (var i = 0; i < carCondition.length; i++) {
+        if (carCondition[i].value != "0") {
+            Uphol[0].style.display = "initial";
+        }
+        else {
+            Uphol[0].style.display = "none";
+        }
+    }
+}
+
 function showSelectValue() {
-    var radio = document.getElementsByName("radio");
-    var question1 = document.getElementsByName("inlineRadioOptions");
-    var q1 = document.getElementsByName("Q1");
+    var carCondition = document.getElementsByName("CarStatus");
+    var Uphol = document.getElementsByName("UpholsteryChanging");
+    if (carCondition.value == "New") {
+        Uphol.style.display = "none";
+    }
+
+
     var value;
     for (i = 0; i < radio.length; i++) {
         if (radio[i].checked) {
