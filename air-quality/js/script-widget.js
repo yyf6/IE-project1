@@ -116,7 +116,7 @@ function loadWidget() {
     var windDirection = compassPointer.attr('data-direction');
     compassPointer.animateRotate(windDirection, 2000, 'easeOutElastic');
 
-    aqiLevelBox.css('max-height', aqiLevelBox.outerHeight());
+    aqiLevelBox.css('min-height', aqiLevelBox.outerHeight());
 
     var message = '';
     if(aqi <= 50) {
@@ -158,9 +158,9 @@ function loadWidget() {
     function aqiLevelBoxHoverIn() {
         aqiLevelText.fadeOut(100, function() {
             aqiLevelText.css({
-                "text-align": "middle",
-                "font-size": "25px",
-                "line-height": "30px"
+                "text-align": "left",
+                "font-size": "12px",
+                "line-height": "15px"
             });
             aqiLevelText.html(message);
         });
@@ -176,9 +176,9 @@ function loadWidget() {
     function aqiLevelBoxHoverOut() {
         aqiLevelText.fadeOut(100, function() {
             aqiLevelText.css({
-                "text-align": "middle",
-                "font-size": "25px",
-                "line-height": "30px"
+                "text-align": aqiLevelTextAlign,
+                "font-size": aqiLevelFontSize,
+                "line-height": aqiLevelFontSize
             });
             aqiLevelText.html(aqi);
         });
