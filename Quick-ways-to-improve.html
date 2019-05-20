@@ -1,0 +1,536 @@
+<!--The quick ways to improve planner function
+    Author: Yifan Yang(Evan)
+    Date: 2019/05/28
+    Function: Provide a function let user quickly get their solution for improving indoor air
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--    import the css and js file on line-->
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/2.0.1/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <title>CSS - Tabs</title>
+
+    <!-- CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Fonts  -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,600italic,600,700italic'
+          rel='stylesheet' type='text/css'>
+    <!-- Define the style of the planner   -->
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+        html {
+            height: 100%;
+        }
+
+        .boxes {
+            margin: auto;
+            padding: 20px;
+        }
+        /*check box style*/
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"] + label {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 20px;
+            font: 14px/20px 'Open Sans', Arial, sans-serif;
+            color: #3385ff;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        input[type="checkbox"] + label:last-child {
+            margin-bottom: 0;
+        }
+
+        input[type="checkbox"] + label:before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #3385ff;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: .6;
+            -webkit-transition: all .12s, border-color .08s;
+            transition: all .12s, border-color .08s;
+        }
+
+        input[type="checkbox"]:checked + label:before {
+            width: 10px;
+            top: -5px;
+            left: 5px;
+            border-radius: 0;
+            opacity: 1;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        /*Tab style*/
+        @import url(http://fonts.googleapis.com/css?family=Maven+Pro);
+        .tab-wrap {
+            -webkit-transition: 0.3s box-shadow ease;
+            transition: 0.3s box-shadow ease;
+            border-radius: 6px;
+            max-width: 100%;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            position: relative;
+            list-style: none;
+            background-color: #fff;
+            margin: 40px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+        .tab-wrap:hover {
+            box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
+        }
+
+        .tab {
+            display: none;
+        }
+        .tab:checked:nth-of-type(1) ~ .tab__content:nth-of-type(1) {
+            opacity: 1;
+            -webkit-transition: 0.5s opacity ease-in, 0.2s transform ease;
+            transition: 0.5s opacity ease-in, 0.2s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+        .tab:checked:nth-of-type(2) ~ .tab__content:nth-of-type(2) {
+            opacity: 1;
+            -webkit-transition: 0.5s opacity ease-in, 0.2s transform ease;
+            transition: 0.5s opacity ease-in, 0.2s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+        .tab:checked:nth-of-type(3) ~ .tab__content:nth-of-type(3) {
+            opacity: 1;
+            -webkit-transition: 0.5s opacity ease-in, 0.2s transform ease;
+            transition: 0.5s opacity ease-in, 0.2s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+        .tab:checked:nth-of-type(4) ~ .tab__content:nth-of-type(4) {
+            opacity: 1;
+            -webkit-transition: 0.5s opacity ease-in, 0.2s transform ease;
+            transition: 0.5s opacity ease-in, 0.2s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+        .tab:first-of-type:not(:last-of-type) + label {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .tab:not(:first-of-type):not(:last-of-type) + label {
+            border-radius: 0;
+        }
+        .tab:last-of-type:not(:first-of-type) + label {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .tab:checked + label {
+            background-color: #fff;
+            box-shadow: 0 -1px 0 #16c7ca inset;
+            cursor: default;
+        }
+        .tab:checked + label:hover {
+            box-shadow: 0 -1px 0 #fff inset;
+            background-color: #046db0;
+        }
+        .tab + label {
+            width:100%;
+            box-shadow: 0 -1px 0 #16c7ca inset;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: #16c7ca;
+            -webkit-box-flex: 3;
+            -webkit-flex-grow: 3;
+            -ms-flex-positive: 3;
+            flex-grow: 3;
+            text-align: center;
+            background-color: #f2f2f2;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            text-align: center;
+            -webkit-transition: 0.3s background-color ease, 0.3s box-shadow ease;
+            transition: 0.3s background-color ease, 0.3s box-shadow ease;
+            height: 50px;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        @media (min-width:768px) {
+
+            .tab + label {
+                width:auto;
+            }
+        }
+        .tab + label:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 1px 0 #f4f4f4 inset;
+        }
+        .tab__content {
+            padding: 10px 25px;
+            background-color: transparent;
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+            opacity: 0;
+            left: 0;
+            -webkit-transform: translateY(-3px);
+            transform: translateY(-3px);
+            border-radius: 6px;
+
+        }
+
+        /* Boring Styles */
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Maven Pro', sans-serif;
+            background-color: #ffffff;
+            color: #777;
+            padding: 0px 0;
+            min-width:350px;
+        }
+        h1,
+        h2 {
+            margin: 0;
+            color: #444;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width:1150px;
+            margin:0 auto;
+            padding-bottom: 0px;
+        }
+        /*Button style*/
+        .myButton {
+            margin-left:10px;
+            -moz-box-shadow:inset 0px 0px 26px -2px #bbdaf7;
+            -webkit-box-shadow:inset 0px 0px 26px -2px #bbdaf7;
+            box-shadow:inset 0px 0px 26px -2px #bbdaf7;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4ec6de), color-stop(1, #9b9beb));
+            background:-moz-linear-gradient(top, #4ec6de 5%, #94dceb 100%);
+            background:-webkit-linear-gradient(top, #4ec6de 5%, #94dceb 100%);
+            background:-o-linear-gradient(top, #4ec6de 5%, #94dceb 100%);
+            background:-ms-linear-gradient(top, #4ec6de 5%, #94dceb 100%);
+            background:linear-gradient(to bottom, #4ec6de 5%, #94dceb 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4ec6de', endColorstr='#9b9beb',GradientType=0);
+            background-color:#94dceb;
+            -moz-border-radius:26px;
+            -webkit-border-radius:26px;
+            border-radius:26px;
+            border:1px solid #84bbf3;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Verdana;
+            font-size:15px;
+            font-weight:bold;
+            padding:11px 27px;
+            text-decoration:none;
+            text-shadow:0px -1px 0px #528ecc;
+        }
+        .myButton:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #9b9beb), color-stop(1, #4ec6de));
+            background:-moz-linear-gradient(top, #9b9beb 5%, #4ec6de 100%);
+            background:-webkit-linear-gradient(top, #9b9beb 5%, #4ec6de 100%);
+            background:-o-linear-gradient(top, #9b9beb 5%, #4ec6de 100%);
+            background:-ms-linear-gradient(top, #9b9beb 5%, #4ec6de 100%);
+            background:linear-gradient(to bottom, #9b9beb 5%, #4ec6de 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9b9beb', endColorstr='#4ec6de',GradientType=0);
+            background-color:#9b9beb;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <!--Create the tab for different scence-->
+    <div class="tab-wrap">
+
+        <input type="radio" id="tab1" name="tabGroup1" class="tab" checked>
+        <label for="tab1">BedRoom</label>
+
+        <input type="radio" id="tab2" name="tabGroup1" class="tab">
+        <label for="tab2">Kitchen</label>
+
+        <input type="radio" id="tab3" name="tabGroup1" class="tab">
+        <label for="tab3">Car</label>
+        <!--Create the tab for bedroom-->
+        <div class="tab__content">
+            <h2 style="color: #4ec6de;">Bedroom</h2>
+            <h4 style="color: #4ec6de;">Select actions/items you have in your bedroom</h4>
+            <div class="boxes">
+                <input type="checkbox" id="ccp">
+                <label for="ccp">Carpet</label>
+                <input type="checkbox" id="caf">
+                <label for="caf">Air Freshener</label>
+                <input type="checkbox" id="cs">
+                <label for="cs">Smoking</label>
+            </div>
+            <br>
+            <button class="myButton" name="sub1">Submit</button>
+            <div id='divcp' style="display : none ; margin-top:40px;">
+                <ul>
+                    <li>Carpet could emit volatile organic compounds (VOCs) and act as a repository for dirt, we
+                        suggest you clean it regularly (Per week).
+                    </li>
+                </ul>
+            </div>
+            <div id='divaf' style="display : none; margin-top:40px;">
+                <ul>
+                    <li>Air Fresheners may emit and generate a range of potentially hazardous air pollutants and it
+                        could stick on the furnitures and beddings, we suggest you to replace it by using essesntial
+                        oils per week.
+                    </li>
+                </ul>
+            </div>
+            <div id='divcs' style="display : none; margin-top:40px;">
+                <ul>
+                    <li>Smoke caused by smoking contains more than 60 kinds of harmful substances such as
+                        formaldehyde and benzene, we suggest you to use air purifier to filter pollutant particles
+                        out of the air(Per 3 hours if you smoking).
+                    </li>
+                </ul>
+            </div>
+            <div id='divcalendar' style="display:none; margin-top:40px;">
+                <h4 style="color: #4ec6de;">Do you want to add this in your schedule using Google Calendar?</h4>
+                <button class="myButton" name="calendar1">Yes</button>
+                <button class="myButton" name="calendarno1">No</button>
+            </div>
+        </div>
+        <!--Create the tab for kitchen-->
+        <div class="tab__content">
+            <h2 style="color: #4ec6de;">Kitchen</h2>
+            <h4 style="color: #4ec6de;">Select actions/items you have in your kitchen</h4>
+            <div class="boxes">
+                <input type="checkbox" id="ckh">
+                <label for="ckh">Range Hood</label>
+                <input type="checkbox" id="cclp">
+                <label for="cclp">Cleaning Products</label>
+                <input type="checkbox" id="cgs">
+                <label for="cgs">Gas Stove</label>
+            </div>
+            <br>
+            <button class="myButton" name="sub2">Submit</button>
+            <div id='divkh' style="display : none ; margin-top:40px;">
+                <ul>
+                    <li>Cooking could cause air pollutants(CO) spared in the air, always turn on the hood range
+                        while cooking(Every time), this could reduce the air pollution level.
+                    </li>
+                </ul>
+            </div>
+            <div id='divcclp' style="display : none; margin-top:40px;">
+                <ul>
+                    <li>Cleaning products may contain chemicals like alcohol, ammonia, chlorine and petroleum-based
+                        solvents, we suggest you to use unscented products and cleaning with basic, natural things
+                        like water and vinegar or baking soda(Every time).
+                    </li>
+                </ul>
+            </div>
+            <div id='divcgs' style="display : none; margin-top:40px;">
+                <ul>
+                    <li>Make use of kitchen hood when you are using gas stoves, if you do not own a cooking range
+                        hood, please make use of your exhaust when you use gas stoves, as they emit high amounts of
+                        NO2(Every time).
+                    </li>
+                </ul>
+            </div>
+            <div id='divcalendar2' style="display:none; margin-top:40px;">
+                <h4 style="color: #4ec6de;">Do you want to add this in your schedule using Google Calendar?</h4>
+                <button class="myButton" name="calendar1">Yes</button>
+                <button class="myButton" name="calendarno1">No</button>
+            </div>
+
+        </div>
+        <!--Create the tab for car-->
+        <div class="tab__content">
+            <h2 style="color: #4ec6de">Car</h2>
+            <h4 style="color: #4ec6de;">Select actions/items you have in your car</h4>
+            <div class="boxes">
+                <input type="checkbox" id="csc">
+                <label for="csc">Smoking in the Car</label>
+                <input type="checkbox" id="cac">
+                <label for="cac">Air Conditioner</label>
+                <input type="checkbox" id="ca">
+                <label for="ca">Air Freshener</label>
+            </div>
+            <br>
+            <button class="myButton" name="sub3">Submit</button>
+            <div id='divcsc' style="display : none ; margin-top:40px;">
+                <ul>
+                    <li>Smoke particles can stick to the interior of a car for a long time, if you want to smoke in
+                        the car, remember to open the windows (Every time).
+                    </li>
+                </ul>
+            </div>
+            <div id='divcac' style="display : none; margin-top:40px;">
+                <ul>
+                    <li>AC vents can store spores and molds, we suggest you do not close the vents and also need to
+                        clean it regularly (Per week).
+                    </li>
+                </ul>
+            </div>
+            <div id='divcca' style="display : none; margin-top:40px;">
+                <ul>
+                    <li>Air freshener could contain harmful substances, use essesntial oils to replace the Air
+                        freshener in the car, and open window regularly(Per 2 hours when you driving the car).
+                    </li>
+                </ul>
+            </div>
+            <div id='divcalendar3' style="display:none; margin-top:40px;">
+                <h4 style="color: #4ec6de;">Do you want to add this in your schedule using Google Calendar?</h4>
+                <button class="myButton" name="calendar1">Yes</button>
+                <button class="myButton" name="calendarno1">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.6/prefixfree.min.js"></script>
+<script type="text/javascript">
+    // Define the bedroom submit button function
+    $("button[name=sub1]").click(function () {
+        if (ccp.checked == true) {
+            divcp.style.display = "block";
+        } else {
+            divcp.style.display = "none";
+        }
+        if (caf.checked == true) {
+            divaf.style.display = "block";
+        } else {
+            divaf.style.display = "none";
+        }
+        if (cs.checked == true) {
+            divcs.style.display = "block";
+        } else {
+            divcs.style.display = "none";
+        }
+        if (ccp.checked == true || caf.checked == true || cs.checked == true) {
+            divcalendar.style.display = "block";
+        } else {
+            divcalendar.style.display = "none";
+        }
+    })
+    $("button[name=calendar1]").click(function () {
+        window.open('https://accounts.google.com/signin/v2/identifier?service=cl&passive=1209600&osid=1&continue=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Frender&followup=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Frender&scc=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin', '_blank');
+    })
+    $("button[name=calendarno1]").click(function () {
+        divcp.style.display = "none";
+        divaf.style.display = "none";
+        divcs.style.display = "none";
+        divcalendar.style.display = "none";
+        divkh.style.display = "none";
+        divcclp.style.display = "none";
+        divcgs.style.display = "none";
+        divcalendar2.style.display = "none";
+        divcsc.style.display = "none";
+        divcac.style.display = "none";
+        divcca.style.display = "none";
+        divcalendar3.style.display = "none";
+    })
+    // Define the kitchen submit button function
+    $("button[name=sub2]").click(function () {
+        if (ckh.checked == true) {
+            divkh.style.display = "block";
+        } else {
+            divkh.style.display = "none";
+        }
+        if (cclp.checked == true) {
+            divcclp.style.display = "block";
+        } else {
+            divcclp.style.display = "none";
+        }
+        if (cgs.checked == true) {
+            divcgs.style.display = "block";
+        } else {
+            divcgs.style.display = "none";
+        }
+        if (ckh.checked == true || cclp.checked == true || cgs.checked == true) {
+            divcalendar2.style.display = "block";
+        } else {
+            divcalendar2.style.display = "none";
+        }
+    })
+    // Define the car submit button function
+    $("button[name=sub3]").click(function () {
+        if (csc.checked == true) {
+            divcsc.style.display = "block";
+        } else {
+            divcsc.style.display = "none";
+        }
+        if (cac.checked == true) {
+            divcac.style.display = "block";
+        } else {
+            divcac.style.display = "none";
+        }
+        if (ca.checked == true) {
+            divcca.style.display = "block";
+        } else {
+            divcca.style.display = "none";
+        }
+        if (csc.checked == true || cac.checked == true || ca.checked == true) {
+            divcalendar3.style.display = "block";
+        } else {
+            divcalendar3.style.display = "none";
+        }
+    })
+</script>
+</body>
+</html>
